@@ -16,6 +16,16 @@ Clerk handles all the OAuth. That is the headline: **your customers sign in thro
 
 One file: [`mcp/tools.ts`](mcp/tools.ts). Plus [`services/index.ts`](services/index.ts), which is where you point at your app's real business logic instead of the shipped stub.
 
+## Building this with an AI assistant
+
+This repo ships with [`AGENTS.md`](AGENTS.md) — standing instructions for coding agents. Claude Code picks it up automatically via [`CLAUDE.md`](CLAUDE.md); Cursor, Codex, and most other agents read `AGENTS.md` directly.
+
+It tells the agent which two files to edit, which files to leave alone, the anti-patterns to refuse (a raw-SQL tool being the big one), and the exact commands to verify its own work rather than declaring success because the code compiled.
+
+So the workflow is just: open the repo with your assistant and tell it what your app does and what your users need to accomplish. It has the rest.
+
+One thing worth doing yourself: skim [`docs/TOOL-DESIGN.md`](docs/TOOL-DESIGN.md) first. Which tools you expose is a product decision, and it is the decision that determines whether the finished server is good. The agent can write them well; it cannot tell you what your users are trying to do.
+
 ## Quickstart
 
 ```bash
@@ -38,6 +48,7 @@ You should get bounced through a Clerk sign-in, land back in the client, and see
 
 | Path | What it is |
 |------|------------|
+| `AGENTS.md` | Standing instructions for AI coding agents. `CLAUDE.md` imports it. |
 | `mcp/tools.ts` | **The file you edit.** Your tool definitions. |
 | `services/index.ts` | **The other file you edit.** Adapter onto your app's business logic. Ships as a stub. |
 | `mcp/registry.ts` | Tool type, scope filtering, error and result helpers. |
